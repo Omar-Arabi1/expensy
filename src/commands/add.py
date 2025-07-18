@@ -4,6 +4,7 @@ from colorama import Fore
 import sqlite3
 from uuid import uuid4
 import datetime
+from sqlite3 import IntegrityError
 
 @click.command(help='add an expense to your list')
 @click.argument('expense')
@@ -28,7 +29,11 @@ def add(expense: str, price: str) -> None:
     with sqlite3.connect('expenses.db') as connection:
         cursor = connection.cursor()
 
-        cursor.execute(insert_query, expense_data)
+        try:
+            cursor.execute(insert_query, expense_data)
+        except IntegrityError:
+            click.echo(Fore.RED + f"expense entered '{expense}' already exists")
+            sys.exit()
 
         connection.commit()
     

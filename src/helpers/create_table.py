@@ -4,7 +4,7 @@ def create_table():
     create_table_query = """
     CREATE TABLE IF NOT EXISTS expenses (
         id TEXT PRIMARY KEY,
-        expense TEXT,
+        expense TEXT UNIQUE,
         price REAL,
         creation_date TEXT
     );
