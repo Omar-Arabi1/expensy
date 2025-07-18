@@ -1,6 +1,6 @@
 [project]
 name = "expensiy"
-version = "1.2.3"
+version = "1.2.4"
 description = "an expense tracker tool to manage your expenses"
 readme = "README.md"
 requires-python = ">=3.13"
@@ -19,4 +19,4 @@ requires = ["setuptools >= 77.0.3"]
 build-backend = "setuptools.build_meta"
 
 [project.scripts]
-cliper = "expensiy.__main__:main"
+expensiy = "expensiy.__main__:main"
