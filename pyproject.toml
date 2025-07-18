@@ -4,8 +4,15 @@ version = "1.2.0"
 description = "an expense tracker tool to manage your expenses"
 readme = "README.md"
 requires-python = ">=3.13"
+authors = [{ name = "Omar Arabi", email = "omarbuisness7@gmail.com" }]
 dependencies = [
     "click>=8.2.1,<9",
     "colorama>=0.4.6,<1",
     "pandas>=2.3.1,<3",
 ]
+
+[project.urls]
+Homepage = "https://github.com/Omar-Arabi1/expensy"
+
+[project.scripts]
+cliper = "expensy_cli.__main__:main"
