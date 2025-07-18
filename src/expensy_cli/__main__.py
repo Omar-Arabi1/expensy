@@ -3,7 +3,7 @@
 import click
 
 from . import __version__
-from commands import add
+from commands import add, remove
 
 CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
 prog_name: str = 'expensy'
@@ -13,6 +13,7 @@ def main() -> None:
     pass
 
 main.add_command(add.add)
+main.add_command(remove.remove)
 
 if __name__ == '__main__':
     main()
