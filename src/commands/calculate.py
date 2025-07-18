@@ -4,35 +4,35 @@ import sys
 import sqlite3
 
 @click.command(help='know the amount of money left from your expenses')
-@click.argument("all_money", type=float)
-def left(all_money: float) -> None:
-    if all_money <= 0:
+@click.argument("balance", type=float)
+def calculate(balance: float) -> None:
+    if balance <= 0:
         click.echo(Fore.RED + 'Invalid all money, all money must be at least 1$')
         sys.exit()
 
-    select_all_query = """ SELECT * FROM expenses;"""
+    select_all_query = """ SELECT * FROM expenses; """
 
     with sqlite3.connect('expenses.db') as connection:
         cursor = connection.cursor()
 
         cursor.execute(select_all_query)
 
-        all_expenses = cursor.fetchall()
+        balance = cursor.fetchall()
 
-        if len(all_expenses) == 0:
+        if len(balance) == 0:
             click.echo(Fore.RED + "you have nothing in your expenses, add something with the 'add' command")
             sys.exit()
 
-        prices: list[float] = [expense[1] for expense in all_expenses]
+        prices: list[float] = [expense[1] for expense in balance]
 
         total_amount_spent: float = sum(prices)
 
-        if total_amount_spent > all_money:
-            click.echo(Fore.RED + "all the money you spent can not be smaller than all the money inside the expenses list")
+        if total_amount_spent > balance:
+            click.echo(Fore.RED + "your balance can't be smaller than all the money spent inside the expenses list")
             sys.exit()
 
     click.echo(Fore.RED + f"you lost -{total_amount_spent}")
 
-    money_kept: float = round(all_money - total_amount_spent, 2)
+    money_kept: float = round(balance - total_amount_spent, 2)
 
     click.echo(Fore.GREEN + f"you kept {money_kept}")
