@@ -2,11 +2,11 @@
 
 import click
 
-from . import __version__
 from commands import add, remove, view, update, calculate, export
 
 CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
-prog_name: str = 'expensy'
+__version__ = '1.2.6'
+prog_name: str = 'expensiy'
 @click.group(context_settings=CONTEXT_SETTINGS, help="an expense tracker to make it easy to manage expenses")
 @click.version_option(__version__, '-v', '--version', prog_name=prog_name, message=f'{prog_name} v{__version__}')
 def main() -> None:
