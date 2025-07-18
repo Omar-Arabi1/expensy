@@ -6,13 +6,16 @@ import pandas as pd
 import os
 
 from helpers.output_file_exceptions_handler import output_file_exception_handler, NoDesiredExtention, FileAlreadyExists, FileDirectoryDoesNotExist
+from helpers.get_db_path import get_db_path
 
 @click.command(help='export your expenses into csv format')
 @click.option('-o', '--output', help='select the place and name of the output file', default='')
 def export(output: str) -> None:
     fetch_all_query = """ SELECT * FROM expenses;"""
 
-    with sqlite3.connect('expenses.db') as connection:
+    db_path: str = get_db_path()
+
+    with sqlite3.connect(db_path) as connection:
         cursor = connection.cursor()
 
         cursor.execute(fetch_all_query)

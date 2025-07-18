@@ -5,6 +5,8 @@ import sqlite3
 import datetime
 from sqlite3 import IntegrityError
 
+from helpers.get_db_path import get_db_path
+
 @click.command(help='add an expense to your list')
 @click.argument('expense')
 @click.argument('price', type=float)
@@ -17,8 +19,10 @@ def add(expense: str, price: float) -> None:
     creation_date: str = str(current_time.date())
     insert_query = "INSERT INTO expenses (expense, price, creation_date) VALUES (?, ?, ?)"
     expense_data = (expense, price, creation_date)
+    
+    db_path: str = get_db_path()
 
-    with sqlite3.connect('expenses.db') as connection:
+    with sqlite3.connect(db_path) as connection:
         cursor = connection.cursor()
 
         try:

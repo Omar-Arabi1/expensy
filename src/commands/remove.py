@@ -3,9 +3,11 @@ import sqlite3
 from colorama import Fore
 import sys
 
+from helpers.get_db_path import get_db_path
+
 @click.command(help='remove an expense from the list')
 @click.option('-d', '--remove-date', help="remove all expenses with the same creation date Y-M-D, if you going to use this option use '_' for expense name", default='')
-@click.option('-a', '--all', help='remove all expenses', default=False, is_flag=True)
+@click.option('-a', '--all', help="remove all expenses, if you are going to use this option use '_' for the expense name", default=False, is_flag=True)
 @click.argument('expense_name')
 def remove(expense_name: str, remove_date: str, all: bool) -> None:
     if remove_date == '' or len(remove_date.split()) == 0:
@@ -15,7 +17,9 @@ def remove(expense_name: str, remove_date: str, all: bool) -> None:
         delete_query = """ DELETE FROM expenses WHERE creation_date = ?; """
         get_expesne_date_query = """ SELECT * FROM expenses WHERE creation_date = ?; """
 
-    with sqlite3.connect('expenses.db') as connection:
+    db_path: str = get_db_path()
+
+    with sqlite3.connect(db_path) as connection:
         cursor = connection.cursor()
         
         if all is True:

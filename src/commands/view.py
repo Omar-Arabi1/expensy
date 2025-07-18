@@ -4,9 +4,13 @@ import sqlite3
 from colorama import Fore, Style
 import sys
 
+from helpers.get_db_path import get_db_path
+
 @click.command(help='view all your expenses')
 def view() -> None:
-    with sqlite3.connect('expenses.db') as connection:        
+    db_path: str = get_db_path()
+    
+    with sqlite3.connect(db_path) as connection:        
         select_all_query = """ SELECT * FROM expenses; """
         
         dataframe = pd.read_sql_query(select_all_query, connection)

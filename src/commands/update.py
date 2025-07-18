@@ -3,6 +3,8 @@ import sqlite3
 from colorama import Fore
 import sys
 
+from helpers.get_db_path import get_db_path
+
 @click.command(help="update an expense's price")
 @click.argument('expense_name')
 @click.argument('new_price', type=float)
@@ -10,7 +12,9 @@ def update(expense_name: str, new_price: float) -> None:
     update_query = """ UPDATE expenses SET price = ? WHERE expense = ?; """
     get_expense_name_query = """ SELECT * FROM expenses WHERE expense = ?; """
 
-    with sqlite3.connect('expenses.db') as connection:
+    db_path: str = get_db_path()
+
+    with sqlite3.connect(db_path) as connection:
         cursor = connection.cursor()
 
         cursor.execute(get_expense_name_query, (expense_name, ))

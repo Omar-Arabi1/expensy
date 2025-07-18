@@ -3,6 +3,8 @@ from colorama import Fore
 import sys
 import sqlite3
 
+from helpers.get_db_path import get_db_path
+
 @click.command(help='know the amount of money left from your expenses')
 @click.argument("balance", type=float)
 def calculate(balance: float) -> None:
@@ -12,7 +14,9 @@ def calculate(balance: float) -> None:
 
     select_all_query = """ SELECT * FROM expenses; """
 
-    with sqlite3.connect('expenses.db') as connection:
+    db_path: str = get_db_path()
+
+    with sqlite3.connect(db_path) as connection:
         cursor = connection.cursor()
 
         cursor.execute(select_all_query)
