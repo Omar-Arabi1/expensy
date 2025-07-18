@@ -7,15 +7,8 @@ from sqlite3 import IntegrityError
 
 @click.command(help='add an expense to your list')
 @click.argument('expense')
-@click.argument('price')
-def add(expense: str, price: str) -> None:
-    try:
-        price: float = float(price)
-    except ValueError:
-        price_type = type(price).__name__
-        click.echo(Fore.RED + f"expected price to be a float got {price_type}")
-        sys.exit()
-
+@click.argument('price', type=float)
+def add(expense: str, price: float) -> None:
     if price <= 0:
         click.echo(Fore.RED + 'Invalid price, price must be at least 1$')
         sys.exit()

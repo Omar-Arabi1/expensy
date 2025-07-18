@@ -5,8 +5,8 @@ import sys
 
 @click.command(help="update an expense's price")
 @click.argument('expense_name')
-@click.argument('new_price')
-def update(expense_name: str, new_price: str) -> None:
+@click.argument('new_price', type=float)
+def update(expense_name: str, new_price: float) -> None:
     update_query = """ UPDATE expenses SET price = ? WHERE expense = ?; """
     get_expense_name_query = """ SELECT * FROM expenses WHERE expense = ?; """
 

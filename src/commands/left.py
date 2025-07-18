@@ -4,15 +4,8 @@ import sys
 import sqlite3
 
 @click.command(help='know the amount of money left from your expenses')
-@click.argument("all_money")
-def left(all_money: str) -> None:
-    try:
-        all_money: float = float(all_money)
-    except ValueError:
-        all_money_type = type(all_money).__name__
-        click.echo(Fore.RED + f"expected price to be a float got {all_money_type}")
-        sys.exit()
-
+@click.argument("all_money", type=float)
+def left(all_money: float) -> None:
     if all_money <= 0:
         click.echo(Fore.RED + 'Invalid all money, all money must be at least 1$')
         sys.exit()

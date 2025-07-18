@@ -4,9 +4,10 @@ from colorama import Fore
 import sys
 
 @click.command(help='remove an expense from the list')
-@click.option('-d', '--remove-date', help='remove all expenses with the same creation date Y-M-D', default='')
+@click.option('-d', '--remove-date', help="remove all expenses with the same creation date Y-M-D, if you going to use this option use '_' for expense name", default='')
+@click.option('-a', '--all', help='remove all expenses', default=False, is_flag=True)
 @click.argument('expense_name')
-def remove(expense_name: str, remove_date: str) -> None:
+def remove(expense_name: str, remove_date: str, all: bool) -> None:
     if remove_date == '' or len(remove_date.split()) == 0:
         delete_query = """ DELETE FROM expenses WHERE expense = ?; """
         get_expense_name_query = """ SELECT * FROM expenses WHERE expense = ?; """
@@ -16,6 +17,12 @@ def remove(expense_name: str, remove_date: str) -> None:
 
     with sqlite3.connect('expenses.db') as connection:
         cursor = connection.cursor()
+        
+        if all is True:
+            cursor.execute(""" DELETE FROM expenses """)
+            click.echo(Fore.GREEN + "removed all expenses in the list")
+            connection.commit()
+            sys.exit()
 
         if remove_date == '' or len(remove_date.split()) == 0:
             cursor.execute(get_expense_name_query, (expense_name, ))
