@@ -25,17 +25,22 @@ def export(output: str) -> None:
 
         dataframe = pd.read_sql_query(fetch_all_query, connection)
 
-    if output == '' or len(output.split()) == 0:
-        dataframe.to_csv('expenses.csv', index=False)
+    if output != '' or len(output.split()) != 0:
+        try:
+            output_file_exception_handler(output_file=output)
+            dataframe.to_csv(output, index=False)
+            click.echo(Fore.GREEN + f"conversion done successfully at {output}")
+        except (NoDesiredExtention, FileAlreadyExists, FileDirectoryDoesNotExist) as err:
+            click.echo(err)
+            sys.exit()
 
-        current_working_directory: str = os.getcwd()
-        expenses_csv_path: str = os.path.join(current_working_directory, 'expenses.csv')
-        click.echo(Fore.GREEN + f"conversion done successfully at {expenses_csv_path}")
+    current_working_directory: str = os.getcwd()
+    expenses_csv_path: str = os.path.join(current_working_directory, 'expenses.csv')
+
+    if os.path.exists(expenses_csv_path) is True:
+        click.echo(Fore.RED + f"the default output location {expenses_csv_path} already exists and can't be overwritten use '--output' option or delete the file to continue")
         sys.exit()
-        
-    try:
-        output_file_exception_handler(output_file=output)
-        dataframe.to_csv(output, index=False)
-        click.echo(Fore.GREEN + f"conversion done successfully at {output}")
-    except (NoDesiredExtention, FileAlreadyExists, FileDirectoryDoesNotExist) as err:
-        click.echo(err)
+
+    dataframe.to_csv('expenses.csv', index=False)
+
+    click.echo(Fore.GREEN + f"conversion done successfully at {expenses_csv_path}")
