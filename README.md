@@ -1,7 +1,7 @@
-# expensy
+# expensiy
 an expense tracker to track your expenses automatically by you inserting your expenses with a price and they will be saved with a date and id once you call the `calculate` command you will see how much you have spent and how much you still have left
 
-install the app with `pipx install expensy`
+install the app with `pipx install expensiy`
 
 ***NOTE:*** *this app isn't available on windows*
 
@@ -25,7 +25,7 @@ the name must be string or TEXT type, while the price must be a float type or a 
 the price must also be greater than 0
 
 #### example:
-`>>> expensy add 'car repairs' 49.99`
+`>>> expensiy add 'car repairs' 49.99`
 
 ## calculate command:
 calculates the amount of money you have left from your balance based on all the expenses inside the list
@@ -35,7 +35,7 @@ the program will subtract that balance that you have entered with the sum of all
 you how much you lost and how much you kept
 
 #### example:
-`>>> expensy calculate 100`
+`>>> expensiy calculate 100`
 
 ## export command:
 exports the list as a csv file
@@ -47,11 +47,11 @@ it should *have a parent directory already exists and the extension '.csv' and i
 by default the application exports the file at your current working directory with the name "expenses.db"
 
 #### bad example:
-`>>> expensy export -o /this/path/does/not/exist.csv`
+`>>> expensiy export -o /this/path/does/not/exist.csv`
 its bad because the provided file's parent directory (e.g /this/path/does/not/) doesn't exist
 
 #### good example:
-`>>> expensy export -o /home/<user>/expenses.csv`
+`>>> expensiy export -o /home/<user>/expenses.csv`
 its good because this file's parent directory (e.g /home/<user>) exists and the file name (e.g expenses.csv) doesn't already exists
 
 ## remove command:
@@ -64,7 +64,7 @@ also note that if you use the options you must put "_" as the expense name it is
 click (the library I used for argument parsing) still takes it as a required argument
 
 #### example:
-`>>> expensy remove _ --all`
+`>>> expensiy remove _ --all`
 
 ## update command:
 updates the price of an existing expense
@@ -75,7 +75,7 @@ with the new_price argument,
 the new_price argument must be a float and it must be greater than 0
 
 #### example:
-`>>> expensy update 'car wash' 83.99`
+`>>> expensiy update 'car wash' 83.99`
 
 ## view command:
 use this command to view all the expenses saved
@@ -83,7 +83,7 @@ use this command to view all the expenses saved
 it takes in nothing and once ran it will show you the expense name, price and creation date
 
 #### example:
-`>>> expensy view`
+`>>> expensiy view`
 
 ---
 
