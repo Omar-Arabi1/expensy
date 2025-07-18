@@ -3,7 +3,7 @@ import sqlite3
 from colorama import Fore
 import sys
 
-@click.command(help="update an expense's price or name")
+@click.command(help="update an expense's price")
 @click.argument('expense_name')
 @click.argument('new_price')
 def update(expense_name: str, new_price: str) -> None:
