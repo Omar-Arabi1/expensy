@@ -3,7 +3,7 @@
 import click
 
 from . import __version__
-from commands import add, remove, view, update
+from commands import add, remove, view, update, left
 
 CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
 prog_name: str = 'expensy'
@@ -16,6 +16,7 @@ main.add_command(add.add)
 main.add_command(remove.remove)
 main.add_command(view.view)
 main.add_command(update.update)
+main.add_command(left.left)
 
 if __name__ == '__main__':
     main()
