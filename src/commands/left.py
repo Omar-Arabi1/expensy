@@ -26,16 +26,20 @@ def left(all_money: str) -> None:
 
         all_expenses = cursor.fetchall()
 
+        if len(all_expenses) == 0:
+            click.echo(Fore.RED + "you have nothing in your expenses, add something with the 'add' command")
+            sys.exit()
+
         prices: list[float] = [expense[1] for expense in all_expenses]
-        
+
         total_amount_spent: float = sum(prices)
-    
+
         if total_amount_spent > all_money:
             click.echo(Fore.RED + "all the money you spent can not be smaller than all the money inside the expenses list")
             sys.exit()
-    
+
     click.echo(Fore.RED + f"you lost -{total_amount_spent}")
-    
+
     money_kept: float = round(all_money - total_amount_spent, 2)
-    
+
     click.echo(Fore.GREEN + f"you kept {money_kept}")
