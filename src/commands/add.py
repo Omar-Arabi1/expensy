@@ -22,7 +22,7 @@ def add(expense: str, price: float) -> None:
     :example >>> expensy add <expense> <price>
     """
     if price <= 0:
-        click.echo(Fore.RED + 'Invalid price, price must be at least 1$')
+        click.echo(Fore.RED + 'Invalid price, price must be at least 1')
         sys.exit()
 
     current_time: datetime = datetime.datetime.now()

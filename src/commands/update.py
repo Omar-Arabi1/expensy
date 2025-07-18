@@ -31,6 +31,10 @@ def update(expense_name: str, new_price: float) -> None:
         if expense is None:
             click.echo(Fore.RED + f"'{expense_name}' does not exist in your list")
             sys.exit()
+        
+        if new_price <= 0:
+            click.echo(Fore.RED + 'Invalid price, price must be at least 1')
+            sys.exit()
 
         cursor.execute(update_query, (new_price, expense_name, ))
 
