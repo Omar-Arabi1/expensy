@@ -85,4 +85,6 @@ it takes in nothing and once ran it will show you the expense name, price and cr
 #### example:
 `>>> expensy view`
 
+---
+
 # THANKS FOR INSTALLING THE TOOL
