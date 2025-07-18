@@ -8,6 +8,12 @@ from helpers.get_db_path import get_db_path
 
 @click.command(help='view all your expenses')
 def view() -> None:
+    """
+    shows all the expenses in the database
+    by converting the database into a pandas dataframe
+    
+    :example >>> expensy view
+    """
     db_path: str = get_db_path()
     
     with sqlite3.connect(db_path) as connection:        

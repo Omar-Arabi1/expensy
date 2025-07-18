@@ -9,6 +9,14 @@ from helpers.get_db_path import get_db_path
 @click.argument('expense_name')
 @click.argument('new_price', type=float)
 def update(expense_name: str, new_price: float) -> None:
+    """
+    updates an existing expense's price
+    
+    :param expense_name = the expense name to update its price
+    :param new_price = the price to update the expense with
+    
+    :example >>> expensy update <expense_name> <new_price>
+    """
     update_query = """ UPDATE expenses SET price = ? WHERE expense = ?; """
     get_expense_name_query = """ SELECT * FROM expenses WHERE expense = ?; """
 

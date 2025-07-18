@@ -11,6 +11,15 @@ from helpers.get_db_path import get_db_path
 @click.command(help='export your expenses into csv format')
 @click.option('-o', '--output', help='select the place and name of the output file', default='')
 def export(output: str) -> None:
+    """
+    exports the database as a csv
+    
+    :param output = an option to choose the output path and name manually (must have .csv extention, its directory must exist, it can't already exist)
+    
+    by default the program exports the csv to your current working directory with the name of "expenses"
+    
+    :example >> expensy export -o /home/<user>/expenses.csv
+    """
     fetch_all_query = """ SELECT * FROM expenses;"""
 
     db_path: str = get_db_path()
