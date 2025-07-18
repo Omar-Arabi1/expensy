@@ -3,8 +3,7 @@ import sqlite3
 def create_table():
     create_table_query = """
     CREATE TABLE IF NOT EXISTS expenses (
-        id TEXT PRIMARY KEY,
-        expense TEXT UNIQUE,
+        expense TEXT UNIQUE PRIMARY KEY,
         price REAL,
         creation_date TEXT
     );

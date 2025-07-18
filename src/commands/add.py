@@ -2,7 +2,6 @@ import click
 import sys
 from colorama import Fore
 import sqlite3
-from uuid import uuid4
 import datetime
 from sqlite3 import IntegrityError
 
@@ -23,8 +22,8 @@ def add(expense: str, price: str) -> None:
     
     current_time: datetime = datetime.datetime.now()
     creation_date: str = str(current_time.date())
-    insert_query = "INSERT INTO expenses (id, expense, price, creation_date) VALUES (?, ?, ?, ?)"
-    expense_data = (str(uuid4()), expense, price, creation_date)
+    insert_query = "INSERT INTO expenses (expense, price, creation_date) VALUES (?, ?, ?)"
+    expense_data = (expense, price, creation_date)
 
     with sqlite3.connect('expenses.db') as connection:
         cursor = connection.cursor()
