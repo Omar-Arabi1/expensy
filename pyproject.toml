@@ -1,6 +1,6 @@
 [project]
 name = "expensiy"
-version = "1.2.6"
+version = "1.2.7"
 description = "an expense tracker tool to manage your expenses"
 readme = "README.md"
 requires-python = ">=3.13"

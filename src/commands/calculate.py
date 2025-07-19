@@ -28,13 +28,13 @@ def calculate(balance: float) -> None:
 
         cursor.execute(select_all_query)
 
-        balance = cursor.fetchall()
+        expenses = cursor.fetchall()
 
-        if len(balance) == 0:
+        if len(expenses) == 0:
             click.echo(Fore.RED + "you have nothing in your expenses, add something with the 'add' command")
             sys.exit()
 
-        prices: list[float] = [expense[1] for expense in balance]
+        prices: list[float] = [expense[1] for expense in expenses]
 
         total_amount_spent: float = sum(prices)
 
